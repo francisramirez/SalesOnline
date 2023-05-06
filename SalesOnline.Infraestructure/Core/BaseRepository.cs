@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SalesOnline.Domain.Core;
 using SalesOnline.Infraestructure.Context;
 
 
 namespace SalesOnline.Infraestructure.Core
 {
-    public abstract class BaseRepository<TEntity> : Domain.Repository.IBaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> : Domain.Repository.IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly SalesContext context;
         private readonly DbSet<TEntity> myDbSet;

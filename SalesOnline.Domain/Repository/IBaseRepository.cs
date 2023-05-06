@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SalesOnline.Domain.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SalesOnline.Domain.Repository
 {
-    public interface IBaseRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         Task<TEntity> GetEntityById(int Id);
         Task<IEnumerable<TEntity>> GetAll();
