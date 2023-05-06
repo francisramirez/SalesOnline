@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <UserSecretsId>f7d34ca6-af9e-474f-a1fa-749cbdf021d8</UserSecretsId>
   </PropertyGroup>
 
 </Project>
