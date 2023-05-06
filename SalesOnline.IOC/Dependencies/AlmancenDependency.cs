@@ -11,6 +11,7 @@ namespace SalesOnline.IOC.Dependencies
         {
             //Repositories
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            
         }
     }
 }

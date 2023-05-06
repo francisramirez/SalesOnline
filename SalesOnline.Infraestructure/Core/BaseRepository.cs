@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,12 @@ namespace SalesOnline.Infraestructure.Core
         {
             return await this.myDbSet.FindAsync(filter);
         }
+
+        public async Task<IEnumerable<TEntity>> FindAll(Expression<Func<TEntity, bool>> filter)
+        {
+            return await this.myDbSet.Where(filter).ToListAsync();
+        }
+
         public async virtual Task<IEnumerable<TEntity>> GetAll()
         {
             return await this.myDbSet.ToListAsync();

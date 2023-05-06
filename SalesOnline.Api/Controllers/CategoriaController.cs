@@ -20,7 +20,7 @@ namespace SalesOnline.Api.Controllers
         public async Task<IActionResult> Get()
         {
             
-            var categories = await this.categoriaRepository.GetAll();
+            var categories =  await this.categoriaRepository.GetAll();
 
             return Ok(categories);
         }

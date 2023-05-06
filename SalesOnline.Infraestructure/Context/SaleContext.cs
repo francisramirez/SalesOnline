@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SalesOnline.Domain.Entities.Almacen;
 using SalesOnline.Infraestructure.Configurations;
 
 namespace SalesOnline.Infraestructure.Context

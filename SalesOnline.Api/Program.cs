@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using SalesOnline.Infraestructure.Context;
 using SalesOnline.IOC.Dependencies;
 
 var builder = WebApplication.CreateBuilder(args);
