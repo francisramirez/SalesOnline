@@ -1,3 +1,5 @@
+using SalesOnline.IOC.Dependencies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+#region "App Dependencies"
+
+builder.Services.AddContextDependency(builder.Configuration.GetConnectionString("SalesContext"));
+
+builder.Services.AddAlmacenDependency();
+
+#endregion
+
 
 var app = builder.Build();
 

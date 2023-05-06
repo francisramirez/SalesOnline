@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Infraestructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Api", "SalesOnline.Api\SalesOnline.Api.csproj", "{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOnline.IOC", "SalesOnline.IOC\SalesOnline.IOC.csproj", "{3F679F30-E427-4B39-A99C-8D8850D6CD63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F679F30-E427-4B39-A99C-8D8850D6CD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F679F30-E427-4B39-A99C-8D8850D6CD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F679F30-E427-4B39-A99C-8D8850D6CD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F679F30-E427-4B39-A99C-8D8850D6CD63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

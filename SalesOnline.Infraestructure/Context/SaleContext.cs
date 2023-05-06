@@ -23,7 +23,7 @@ namespace SalesOnline.Infraestructure.Context
 
             modelBuilder.AddDependencySeguridadEntity();
 
-            base.OnModelCreating(modelBuilder);
+            // base.OnModelCreating(modelBuilder);
         }
 
     }
