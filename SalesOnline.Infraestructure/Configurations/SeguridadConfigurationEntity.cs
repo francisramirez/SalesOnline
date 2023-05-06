@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using SalesOnline.Domain.Entities.Seguridad;
 
-namespace SalesOnline.Infraestructure.Dependencies
+namespace SalesOnline.Infraestructure.Configurations
 {
-    public static class SeguridadEntityDependency
+    public static class SeguridadConfigurationEntity
     {
-        public static void AddDependencySeguridadEntity(this ModelBuilder modelBuilder)
+        public static void AddConfigurationSeguridadEntity(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Menu>(entity =>
             {

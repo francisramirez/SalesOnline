@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesOnline.Domain.Entities.Almacen;
 
-namespace SalesOnline.Infraestructure.Dependencies
+namespace SalesOnline.Infraestructure.Configurations
 {
-    public static class AlmacenEntityDependency
+    public static class AlmacenConfigurationEntity
     {
-        public static void AddDependencyAlmacenEntity(this ModelBuilder modelBuilder) 
+        public static void AddConfigurationAlmacenEntity(this ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<Categoria>(entity =>
             {

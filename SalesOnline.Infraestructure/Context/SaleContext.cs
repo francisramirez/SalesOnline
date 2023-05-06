@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesOnline.Infraestructure.Dependencies;
+using SalesOnline.Infraestructure.Configurations;
 
 namespace SalesOnline.Infraestructure.Context
 {
@@ -15,13 +15,13 @@ namespace SalesOnline.Infraestructure.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.AddDependencyAlmacenEntity();
+            modelBuilder.AddConfigurationAlmacenEntity();
 
-            modelBuilder.AddDependencyVentaEntity();
+            modelBuilder.AddConfigurationConfiguracionEntity();
 
-            modelBuilder.AddDependencyConfiguracionEntity();
+            modelBuilder.AddConfigurationVentaEntity();
 
-            modelBuilder.AddDependencySeguridadEntity();
+            modelBuilder.AddConfigurationSeguridadEntity();
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesOnline.Domain.Entities.Ventas;
 
-namespace SalesOnline.Infraestructure.Dependencies
+namespace SalesOnline.Infraestructure.Configurations
 {
-    public static class VentaEntityDependency
+    public static class VentaConfigurationEntity
     {
-        public static void AddDependencyVentaEntity(this ModelBuilder modelBuilder)
+        public static void AddConfigurationVentaEntity(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DetalleVenta>(entity =>
             {

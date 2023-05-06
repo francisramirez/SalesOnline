@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using SalesOnline.Domain.Entities.Configuracion;
 
-namespace SalesOnline.Infraestructure.Dependencies
+namespace SalesOnline.Infraestructure.Configurations
 {
-    public static class ConfiguracionEntityDependency
+    public static class ConfiguracionEntity
     {
-        public static void AddDependencyConfiguracionEntity(this ModelBuilder modelBuilder)
+        public static void AddConfigurationConfiguracionEntity(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Negocio>(entity =>
             {
