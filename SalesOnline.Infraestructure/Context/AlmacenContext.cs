@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesOnline.Domain.Entities;
+using SalesOnline.Domain.Entities.Almacen;
 
 namespace SalesOnline.Infraestructure.Context
 {
-    public partial class SaleContext
+    public partial class SalesContext
     {
         public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<Suplidor> Suplidores { get; set; }
+        public DbSet<Producto> Suplidores { get; set; }
         
     }
 }

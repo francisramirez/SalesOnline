@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Web", "SalesOnline.Web\SalesOnline.Web.csproj", "{16F39CA3-AD6D-4A85-B866-7843C0354A88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOnline.Domain", "SalesOnline.Domain\SalesOnline.Domain.csproj", "{014F746F-0FC4-47A2-830C-2C439320031D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Domain", "SalesOnline.Domain\SalesOnline.Domain.csproj", "{014F746F-0FC4-47A2-830C-2C439320031D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOnline.Infraestructure", "SalesOnline.Infraestructure\SalesOnline.Infraestructure.csproj", "{589B8937-AECA-41CB-A255-B0DD11A0664F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Infraestructure", "SalesOnline.Infraestructure\SalesOnline.Infraestructure.csproj", "{589B8937-AECA-41CB-A255-B0DD11A0664F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Api", "SalesOnline.Api\SalesOnline.Api.csproj", "{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{589B8937-AECA-41CB-A255-B0DD11A0664F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{589B8937-AECA-41CB-A255-B0DD11A0664F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{589B8937-AECA-41CB-A255-B0DD11A0664F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960F19AA-5F06-4E95-8E5F-D01F0A49BC8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

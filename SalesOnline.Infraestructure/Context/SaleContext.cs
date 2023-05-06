@@ -1,18 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesOnline.Domain.Entities;
+using SalesOnline.Infraestructure.Dependencies;
 
 namespace SalesOnline.Infraestructure.Context
 {
-    public partial class SaleContext : DbContext
+    public partial class SalesContext : DbContext
     {
-        public SaleContext()
+        public SalesContext()
         {
 
         }
-        public SaleContext(DbContextOptions<SaleContext> options) :base(options)
+        public SalesContext(DbContextOptions<SalesContext> options)
+               : base(options)
         {
-
         }
-       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.AddDependencyAlmacenEntity();
+
+            modelBuilder.AddDependencyVentaEntity();
+
+            modelBuilder.AddDependencyConfiguracionEntity();
+
+            modelBuilder.AddDependencySeguridadEntity();
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

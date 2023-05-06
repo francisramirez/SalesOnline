@@ -10,9 +10,9 @@ namespace SalesOnline.Infraestructure.Core
 {
     public abstract class BaseRepository<TEntity> : Domain.Repository.IBaseRepository<TEntity> where TEntity : class
     {
-        private readonly SaleContext context;
+        private readonly SalesContext context;
         private readonly DbSet<TEntity> myDbSet;
-        public BaseRepository(SaleContext context)
+        public BaseRepository(SalesContext context)
         {
             this.context = context;
             this.myDbSet = this.context.Set<TEntity>();

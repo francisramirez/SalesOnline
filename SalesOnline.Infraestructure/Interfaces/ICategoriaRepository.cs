@@ -1,7 +1,4 @@
-﻿using SalesOnline.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SalesOnline.Domain.Entities.Almacen;
 
 namespace SalesOnline.Infraestructure.Interfaces
 {
