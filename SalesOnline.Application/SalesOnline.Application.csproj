@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Models\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Extentions\" />
   </ItemGroup>

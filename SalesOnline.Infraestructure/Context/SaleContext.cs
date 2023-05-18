@@ -26,6 +26,6 @@ namespace SalesOnline.Infraestructure.Context
 
             base.OnModelCreating(modelBuilder);
         }
-      
+
     }
 }

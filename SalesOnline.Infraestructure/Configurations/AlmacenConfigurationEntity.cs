@@ -7,8 +7,12 @@ namespace SalesOnline.Infraestructure.Configurations
     {
         public static void AddConfigurationAlmacenEntity(this ModelBuilder modelBuilder) 
         {
+
+
             modelBuilder.Entity<Categoria>(entity =>
             {
+
+               
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -24,6 +28,7 @@ namespace SalesOnline.Infraestructure.Configurations
 
             modelBuilder.Entity<Producto>(entity =>
             {
+               
                 entity.Property(e => e.CodigoBarra)
                     .HasMaxLength(50)
                     .IsUnicode(false);

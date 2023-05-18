@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Api", "SalesOnl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.IOC", "SalesOnline.IOC\SalesOnline.IOC.csproj", "{3F679F30-E427-4B39-A99C-8D8850D6CD63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOnline.Application", "SalesOnline.Application\SalesOnline.Application.csproj", "{4855447D-142E-4AB4-AA1F-46EF755A386A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOnline.Application", "SalesOnline.Application\SalesOnline.Application.csproj", "{4855447D-142E-4AB4-AA1F-46EF755A386A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

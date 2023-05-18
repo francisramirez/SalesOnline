@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesOnline.Application.Contract;
+using SalesOnline.Application.Dtos.Producto;
 using SalesOnline.Domain.Entities.Almacen;
 using SalesOnline.Infraestructure.Exceptions;
 using SalesOnline.Infraestructure.Interfaces;
@@ -9,44 +11,47 @@ namespace SalesOnline.Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductoRepository productoRepository;
+        private readonly IProductoService productoService;
 
-        public ProductController(IProductoRepository productoRepository)
+        public ProductController(IProductoService productoService)
         {
-            this.productoRepository = productoRepository;
+            this.productoService = productoService;
         }
         // GET: api/<ProductController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var products = await this.productoRepository.GetAll();
+            var products = await this.productoService.Get();
 
             return Ok(products);
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            var result = await this.productoService.GetById(id);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+
+            return Ok(result);
+            
         }
 
         // POST api/<ProductController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Producto producto)
+        public async Task<IActionResult> Post([FromBody] ProductAddDto productAddDto)
         {
-            try
-            {
-                await this.productoRepository.Save(producto);
 
-            }
-            catch (ProductoException pex)
-            {
+            var result = await this.productoService.SaveProduct(productAddDto);
 
-                var mensaje = pex.Message;
-            }
+            if (!result.Success)
+                return BadRequest(result);
 
-            return Ok();
+
+            return Ok(result);
         }
 
         // PUT api/<ProductController>/5

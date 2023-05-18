@@ -1,5 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using SalesOnline.Application.Contract;
+using SalesOnline.Application.Services;
 using SalesOnline.Infraestructure.Interfaces;
 using SalesOnline.Infraestructure.Repositories;
 
@@ -9,10 +11,18 @@ namespace SalesOnline.IOC.Dependencies
     {
         public static void AddAlmacenDependency(this IServiceCollection services) 
         {
-            //Repositories
-            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+            #region "Repositories"
             services.AddScoped<IProductoRepository, ProductoRepository>();
-            
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+
+            #endregion
+
+            #region "Services"
+            services.AddTransient<IProductoService, ProductoService>();
+            #endregion
+
         }
     }
 }
