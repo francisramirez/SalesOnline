@@ -17,7 +17,6 @@ namespace SalesOnline.Api.Controllers
         {
             this.productoService = productoService;
         }
-        // GET: api/<ProductController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,7 +25,6 @@ namespace SalesOnline.Api.Controllers
             return Ok(products);
         }
 
-        // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -40,7 +38,6 @@ namespace SalesOnline.Api.Controllers
             
         }
 
-        // POST api/<ProductController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ProductAddDto productAddDto)
         {
@@ -54,13 +51,11 @@ namespace SalesOnline.Api.Controllers
             return Ok(result);
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

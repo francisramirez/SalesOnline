@@ -8,6 +8,8 @@ using SalesOnline.Application.Dtos.Producto;
 using SalesOnline.Application.Responses;
 using SalesOnline.Infraestructure.Interfaces;
 using SalesOnline.Domain.Entities.Almacen;
+using SalesOnline.Application.Extentions;
+using System.Collections.Generic;
 
 namespace SalesOnline.Application.Services
 {
@@ -31,19 +33,7 @@ namespace SalesOnline.Application.Services
 
             try
             {
-                var query = (from prod in (await this.productoRepository.GetAll())
-                             join cate in (await this.categoriaRepository.GetAll()) on prod.IdCategoria equals cate.Id
-                             select new Models.ProductGetModel()
-                             {
-                                 Categoria = cate.Descripcion,
-                                 Descripcion = prod.Descripcion,
-                                 Marca = prod.Marca,
-                                 Precio = prod.Precio,
-                                 ProductoId = prod.Id,
-                                 Stock = prod.Stock
-                             }).ToList();
-
-                result.Data = query;
+                result.Data = await getProductos();
 
             }
             catch (Exception ex)
@@ -62,21 +52,7 @@ namespace SalesOnline.Application.Services
 
             try
             {
-                var prodModel = (from prod in (await this.productoRepository.GetAll())
-                                 join cate in (await this.categoriaRepository.GetAll()) on prod.IdCategoria equals cate.Id
-                                 where prod.Id == Id
-                                 select new Models.ProductGetModel()
-                                 {
-                                     Categoria = cate.Descripcion,
-                                     Descripcion = prod.Descripcion,
-                                     Marca = prod.Marca,
-                                     Precio = prod.Precio,
-                                     ProductoId = prod.Id,
-                                     Stock = prod.Stock
-                                 }).FirstOrDefault();
-
-
-                result.Data = prodModel;
+                result.Data = (await this.getProductos(Id)).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -87,14 +63,57 @@ namespace SalesOnline.Application.Services
 
             return result;
         }
-        public Task<ProductAddResponse> ModifyProduct(ProductUpdateDto productUpdateDto)
+        public async Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto)
         {
-            throw new System.NotImplementedException();
+            ServiceResult result = new ServiceResult();
+            
+            try
+            {
+
+                if (string.IsNullOrEmpty(productUpdateDto.CodigoBarra))
+                {
+                    result.Message = "Código de barra es requerido";
+                    result.Success = false;
+                    return result;
+                }
+
+                if (productUpdateDto.CodigoBarra.Length > 50)
+                {
+                    result.Message = "Logitud inválidad";
+                    result.Success = false;
+                    return result;
+                }
+
+
+                Producto producto = await this.productoRepository.GetEntityById(productUpdateDto.ProductoId);
+
+                producto.CodigoBarra = productUpdateDto.CodigoBarra;
+                producto.Marca = productUpdateDto.Marca;
+                producto.Precio = productUpdateDto.Precio;
+                producto.Stock = productUpdateDto.Stock;
+                producto.UrlImagen = productUpdateDto.UrlImagen;
+                producto.NombreImagen = productUpdateDto.NombreImagen;
+                producto.IdCategoria = productUpdateDto.IdCategoria;
+                producto.Descripcion = productUpdateDto.Descripcion;
+                producto.FechaMod = DateTime.Now;
+                producto.IdUsuarioMod = productUpdateDto.IdUsuario;
+
+               await this.productoRepository.Update(producto);
+
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = "Error modificando el producto";
+                this.logger.Log(LogLevel.Error, $" {result.Message}", ex.ToString());
+            }
+
+            return result;
         }
         public async Task<ProductAddResponse> SaveProduct(ProductAddDto productAddDto)
         {
             ProductAddResponse productAddResponse = new ProductAddResponse();
-            
+
             try
             {
                 if (string.IsNullOrEmpty(productAddDto.CodigoBarra))
@@ -111,21 +130,7 @@ namespace SalesOnline.Application.Services
                     return productAddResponse;
                 }
 
-                Producto producto = new Producto()
-                {
-                    CodigoBarra = productAddDto.CodigoBarra,
-                    Descripcion = productAddDto.Descripcion,
-                    Eliminado = false,
-                    EsActivo = true,
-                    IdCategoria = productAddDto.IdCategoria,
-                    IdUsuarioCreacion = productAddDto.IdUsuario,
-                    Marca = productAddDto.Marca,
-                    Precio = productAddDto.Precio,
-                    NombreImagen = productAddDto.NombreImagen,
-                    Stock = productAddDto.Stock,
-                    UrlImagen = productAddDto.UrlImagen,
-                    FechaRegistro = DateTime.Now
-                };
+                Producto producto = productAddDto.ConvertDtoAddProductToProduct();
 
                 await this.productoRepository.Save(producto);
 
@@ -141,6 +146,53 @@ namespace SalesOnline.Application.Services
             }
 
             return productAddResponse;
+        }
+        private async Task<List<Models.ProductGetModel>> getProductos(int? Id = null)
+        {
+            List<Models.ProductGetModel> products = new List<Models.ProductGetModel>();
+
+            try
+            {
+
+                //if (Id.HasValue)
+                //{
+
+                //}
+
+                //products = (from prod in (await this.productoRepository.GetAll())
+                //            join cate in (await this.categoriaRepository.GetAll()) on prod.IdCategoria equals cate.Id
+                //            where prod.Id == ( Id.HasValue ? Id : prod.Id)
+                //            select new Models.ProductGetModel()
+                //            {
+                //                Categoria = cate.Descripcion,
+                //                Descripcion = prod.Descripcion,
+                //                Marca = prod.Marca,
+                //                Precio = prod.Precio,
+                //                ProductoId = prod.Id,
+                //                Stock = prod.Stock
+                //            }).ToList();
+
+
+                products = (from prod in (await this.productoRepository.GetAll())
+                            join cate in (await this.categoriaRepository.GetAll()) on prod.IdCategoria equals cate.Id
+                            where prod.Id == Id || !Id.HasValue
+                            select new Models.ProductGetModel()
+                            {
+                                Categoria = cate.Descripcion,
+                                Descripcion = prod.Descripcion,
+                                Marca = prod.Marca,
+                                Precio = prod.Precio,
+                                ProductoId = prod.Id,
+                                Stock = prod.Stock
+                            }).ToList();
+            }
+            catch (Exception ex)
+            {
+                products = null;
+                this.logger.Log(LogLevel.Error, "Error obteniendo los productos", ex.ToString());
+            }
+
+            return products;
         }
     }
 }

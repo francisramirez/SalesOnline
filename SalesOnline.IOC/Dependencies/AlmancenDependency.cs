@@ -15,8 +15,6 @@ namespace SalesOnline.IOC.Dependencies
             #region "Repositories"
             services.AddScoped<IProductoRepository, ProductoRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-
-
             #endregion
 
             #region "Services"
