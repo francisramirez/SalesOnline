@@ -40,5 +40,11 @@ namespace SalesOnline.Infraestructure.Repositories
 
 
         }
+        public override async Task Update(Producto entity)
+        {
+
+            await base.Update(entity);
+            await base.SaveChanges();
+        }
     }
 }

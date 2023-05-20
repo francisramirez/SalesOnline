@@ -38,7 +38,7 @@ namespace SalesOnline.Api.Controllers
             
         }
 
-        [HttpPost]
+        [HttpPost("SaveProduct")]
         public async Task<IActionResult> Post([FromBody] ProductAddDto productAddDto)
         {
 
@@ -51,14 +51,17 @@ namespace SalesOnline.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("UpdateProduct")]
+        public async Task<IActionResult> Put([FromBody] ProductUpdateDto productUpdate)
         {
-        }
+            var result = await this.productoService.ModifyProduct(productUpdate);
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (!result.Success)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
+       
     }
 }
