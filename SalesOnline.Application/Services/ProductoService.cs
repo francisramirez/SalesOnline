@@ -66,7 +66,7 @@ namespace SalesOnline.Application.Services
         public async Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto)
         {
             ServiceResult result = new ServiceResult();
-            
+
             try
             {
 
@@ -98,7 +98,7 @@ namespace SalesOnline.Application.Services
                 producto.FechaMod = DateTime.Now;
                 producto.IdUsuarioMod = productUpdateDto.IdUsuario;
 
-               await this.productoRepository.Update(producto);
+                await this.productoRepository.Update(producto);
 
             }
             catch (Exception ex)
@@ -183,7 +183,11 @@ namespace SalesOnline.Application.Services
                                 Marca = prod.Marca,
                                 Precio = prod.Precio,
                                 ProductoId = prod.Id,
-                                Stock = prod.Stock
+                                Stock = prod.Stock,
+                                CodigoBarra = prod.CodigoBarra, 
+                                IdCategoria= prod.IdCategoria, 
+                                NombreImagen = prod.NombreImagen, 
+                                UrlImagen = prod.UrlImagen
                             }).ToList();
             }
             catch (Exception ex)

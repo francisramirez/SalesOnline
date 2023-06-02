@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SalesOnline.Web.ApiServices.Interfaces;
+using SalesOnline.Web.Models.Requests;
 using SalesOnline.Web.Models.Responses;
 using static System.Net.WebRequestMethods;
 
@@ -8,12 +10,15 @@ namespace SalesOnline.Web.Controllers
 {
     public class ProductoController : Controller
     {
+        private readonly IProductApiService productApiService;
         private readonly IConfiguration configuration;
         private readonly ILogger<ProductoController> logger;
         private HttpClientHandler clientHandler = new HttpClientHandler();
-        public ProductoController(IConfiguration configuration, 
+        public ProductoController(IProductApiService productApiService,
+                                  IConfiguration configuration,
                                   ILogger<ProductoController> logger)
         {
+            this.productApiService = productApiService;
             this.configuration = configuration;
             this.logger = logger;
         }
@@ -25,18 +30,20 @@ namespace SalesOnline.Web.Controllers
 
             try
             {
-                using (var httpclient = new HttpClient(this.clientHandler))
-                {
-                    var response = await httpclient.GetAsync("http://localhost:5062/api/Product");
+                productoList = await this.productApiService.GetProductos();
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string resp = await response.Content.ReadAsStringAsync();
+                //using (var httpclient = new HttpClient(this.clientHandler))
+                //{
+                //    var response = await httpclient.GetAsync("http://localhost:5062/api/Product");
 
-                        productoList = JsonConvert.DeserializeObject<ProductoListResponse>(resp);
+                //    if (response.IsSuccessStatusCode)
+                //    {
+                //        string resp = await response.Content.ReadAsStringAsync();
 
-                    }
-                }
+                //        productoList = JsonConvert.DeserializeObject<ProductoListResponse>(resp);
+
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -54,21 +61,24 @@ namespace SalesOnline.Web.Controllers
 
             try
             {
-                using (var httpclient = new HttpClient(this.clientHandler))
-                {
 
-                    var url = "http://localhost:5062/api/Product/" + id;
+                productoGet = await this.productApiService.GetProducto(id);
 
-                    var response = await httpclient.GetAsync(url);
+                //using (var httpclient = new HttpClient(this.clientHandler))
+                //{
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string resp = await response.Content.ReadAsStringAsync();
+                //    var url = "http://localhost:5062/api/Product/" + id;
 
-                        productoGet = JsonConvert.DeserializeObject<ProductoGetResponse>(resp);
+                //    var response = await httpclient.GetAsync(url);
 
-                    }
-                }
+                //    if (response.IsSuccessStatusCode)
+                //    {
+                //        string resp = await response.Content.ReadAsStringAsync();
+
+                //        productoGet = JsonConvert.DeserializeObject<ProductoGetResponse>(resp);
+
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -88,10 +98,13 @@ namespace SalesOnline.Web.Controllers
         // POST: ProductoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(ProductSaveRequest productSave)
         {
             try
             {
+
+                var result = await this.productApiService.SaveProducto(productSave);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -101,18 +114,39 @@ namespace SalesOnline.Web.Controllers
         }
 
         // GET: ProductoController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+
+            var productoGet = await this.productApiService.GetProducto(id);
+
+            ProductSaveRequest productSave = new ProductSaveRequest()
+            {
+                codigoBarra = productoGet.data.codigoBarra,
+                descripcion = productoGet.data.descripcion,
+                idCategoria = productoGet.data.idCategoria,
+                marca = productoGet.data.marca,
+                nombreImagen = productoGet.data.nombreImagen,
+                precio = productoGet.data.precio,
+                stock = productoGet.data.stock,
+                urlImagen = productoGet.data.urlImagen,
+                productoId = productoGet.data.productoId
+
+            };
+
+
+            return View(productSave);
         }
 
         // POST: ProductoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(ProductSaveRequest productSave)
         {
             try
             {
+
+                await this.productApiService.UpdateProducto(productSave);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -122,24 +156,6 @@ namespace SalesOnline.Web.Controllers
         }
 
         // GET: ProductoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ProductoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

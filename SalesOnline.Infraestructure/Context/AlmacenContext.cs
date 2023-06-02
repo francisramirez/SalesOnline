@@ -7,6 +7,7 @@ namespace SalesOnline.Infraestructure.Context
     {
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Producto> Producto { get; set; }
-        
+        public DbSet<ProductoCategoria> ProductoCategoria { get; set; }
+
     }
 }

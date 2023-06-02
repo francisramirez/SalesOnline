@@ -8,11 +8,10 @@ namespace SalesOnline.Infraestructure.Configurations
         public static void AddConfigurationAlmacenEntity(this ModelBuilder modelBuilder) 
         {
 
-
             modelBuilder.Entity<Categoria>(entity =>
             {
 
-               
+              
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -28,7 +27,6 @@ namespace SalesOnline.Infraestructure.Configurations
 
             modelBuilder.Entity<Producto>(entity =>
             {
-               
                 entity.Property(e => e.CodigoBarra)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -58,8 +56,29 @@ namespace SalesOnline.Infraestructure.Configurations
                 entity.Property(e => e.UrlImagen)
                     .HasMaxLength(500)
                     .IsUnicode(false);
-             
             });
+
+            modelBuilder.Entity<ProductoCategoria>(entity =>
+            {
+                entity.HasKey(e => new { e.ProductoId, e.CategoriaId });
+
+                entity.Property(e => e.ProductoId).HasColumnName("Producto_Id");
+
+                entity.Property(e => e.CategoriaId).HasColumnName("Categoria_Id");
+
+                entity.HasOne(d => d.Categoria)
+                    .WithMany(p => p.ProductoCategoria)
+                    .HasForeignKey(d => d.CategoriaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductoCategoria_Categoria_Id");
+
+                entity.HasOne(d => d.Producto)
+                    .WithMany(p => p.ProductoCategoria)
+                    .HasForeignKey(d => d.ProductoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductoCategoria_Producto_Id");
+            });
+
         }
     }
 }

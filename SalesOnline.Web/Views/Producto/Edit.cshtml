@@ -1,0 +1,69 @@
+﻿@model SalesOnline.Web.Models.Requests.ProductSaveRequest
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar producto: @Model.descripcion</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="productoId" />
+            <div class="form-group">
+                <label asp-for="codigoBarra" class="control-label"></label>
+                <input asp-for="codigoBarra" class="form-control" />
+                <span asp-validation-for="codigoBarra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="marca" class="control-label"></label>
+                <input asp-for="marca" class="form-control" />
+                <span asp-validation-for="marca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idCategoria" class="control-label"></label>
+                <input asp-for="idCategoria" class="form-control" />
+                <span asp-validation-for="idCategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stock" class="control-label"></label>
+                <input asp-for="stock" class="form-control" />
+                <span asp-validation-for="stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="urlImagen" class="control-label"></label>
+                <input asp-for="urlImagen" class="form-control" />
+                <span asp-validation-for="urlImagen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombreImagen" class="control-label"></label>
+                <input asp-for="nombreImagen" class="form-control" />
+                <span asp-validation-for="nombreImagen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precio" class="control-label"></label>
+                <input asp-for="precio" class="form-control" />
+                <span asp-validation-for="precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
