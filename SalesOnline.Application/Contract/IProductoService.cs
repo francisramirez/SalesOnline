@@ -12,6 +12,7 @@ namespace SalesOnline.Application.Contract
         Task<ProductAddResponse> SaveProduct(ProductAddDto productAddDto);
         Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto);
         Task<ServiceResult> GetProductoCategoriaDetail(int productoId);
+        Task<ServiceResult> GetProductosByCategoria(int categoriaId);
 
     }
 }

@@ -39,10 +39,22 @@ namespace SalesOnline.Api.Controllers
         }
 
 
-        [HttpGet("GetProductCategoria")]
-        public async Task<IActionResult> GetProductCategoria(int id)
+        [HttpGet("GetProductoCategoriaDetail")]
+        public async Task<IActionResult> GetProductoCategoriaDetail(int id)
         {
             var result = await this.productoService.GetProductoCategoriaDetail(id);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+
+            return Ok(result);
+
+        }
+        [HttpGet("GetProductosByCategoria")]
+        public async Task<IActionResult> GetProductosByCategoria(int categoriaId)
+        {
+            var result = await this.productoService.GetProductosByCategoria(categoriaId);
 
             if (!result.Success)
                 return BadRequest(result);

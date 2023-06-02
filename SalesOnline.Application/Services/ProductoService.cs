@@ -83,6 +83,22 @@ namespace SalesOnline.Application.Services
             return result;
         }
 
+        public async Task<ServiceResult> GetProductosByCategoria(int categoriaId)
+        {
+            ServiceResult result = new ServiceResult();
+            try
+            {
+                result.Data = await this.productoRepository.GetProductsByCategory(categoriaId);
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = "Error obteniendo los productos.";
+                this.logger.LogError(result.Message, ex.ToString());
+            }
+            return result;
+        }
+
         public async Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto)
         {
             ServiceResult result = new ServiceResult();

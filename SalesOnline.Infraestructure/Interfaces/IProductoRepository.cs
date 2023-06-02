@@ -10,7 +10,7 @@ namespace SalesOnline.Infraestructure.Interfaces
 {
     public interface IProductoRepository : IBaseRepository<Producto>
     {
-        Task<List<Producto>> GetProductByCategory(int categoryId);
+        Task<List<ProductoModel>> GetProductsByCategory(int categoryId);
         Task<ProductoCategoriaModel> GetProductoCategoria(int productoId);
     }
 }

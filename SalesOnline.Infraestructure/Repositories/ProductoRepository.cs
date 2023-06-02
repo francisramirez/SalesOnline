@@ -25,9 +25,38 @@ namespace SalesOnline.Infraestructure.Repositories
             this.context = context;
             this.logger = logger;
         }
-        public async Task<List<Producto>> GetProductByCategory(int categoryId)
+        public async Task<List<ProductoModel>> GetProductsByCategory(int categoryId)
         {
-            throw new System.NotImplementedException();
+            List<ProductoModel> productos = new List<ProductoModel>();
+
+            try
+            {
+                productos = (from pro in (await base.GetAll()).ToList()
+                             join proca in context.ProductoCategoria.ToList() on pro.Id equals proca.ProductoId
+                             join ca in context.Categoria.ToList() on proca.CategoriaId equals ca.Id
+                             where proca.CategoriaId == categoryId
+                             select new ProductoModel()
+                             {
+                                 CodigoBarra = pro.CodigoBarra,
+                                 Descripcion = pro.Descripcion,
+                                 IdCategoria = proca.CategoriaId,
+                                 Marca = pro.Marca,
+                                 NombreImagen = pro.NombreImagen,
+                                 Precio = pro.Precio,
+                                 ProductoId = pro.Id,
+                                 Stock = pro.Stock,
+                                 UrlImagen = pro.UrlImagen,
+                                 Categoria = ca.Descripcion
+                             }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError("error obteniendo los productos con sus categorias", ex.Message);
+
+            }
+
+            return productos;
         }
 
         public async Task<ProductoCategoriaModel> GetProductoCategoria(int productoId)
@@ -66,6 +95,7 @@ namespace SalesOnline.Infraestructure.Repositories
             }
             catch (Exception ex)
             {
+
                 this.logger.LogError("error obteniendo los productos con sus categorias", ex.Message);
             }
 
