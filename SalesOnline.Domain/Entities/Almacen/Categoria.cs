@@ -11,7 +11,7 @@ namespace SalesOnline.Domain.Entities.Almacen
         }
         public int Id { get; set; }
         public string? Descripcion { get; set; }
-        public ICollection<ProductoCategoria> ProductoCategoria { get; set; }
+        public virtual ICollection<ProductoCategoria> ProductoCategoria { get; set; }
 
     }
 }

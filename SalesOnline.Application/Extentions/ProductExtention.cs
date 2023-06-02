@@ -16,7 +16,6 @@ namespace SalesOnline.Application.Extentions
             {
                 CodigoBarra = productAddDto.CodigoBarra,
                 Descripcion = productAddDto.Descripcion,
-                IdCategoria = productAddDto.IdCategoria,
                 Marca = productAddDto.Marca,
                 NombreImagen = productAddDto.NombreImagen,
                 Precio = productAddDto.Precio,

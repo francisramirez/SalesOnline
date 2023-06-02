@@ -7,10 +7,11 @@ namespace SalesOnline.Application.Contract
 {
     public interface IProductoService
     {
-       Task<ServiceResult> Get();
-       Task<ServiceResult> GetById(int Id);
-       Task<ProductAddResponse> SaveProduct(ProductAddDto productAddDto);
-       Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto);
+        Task<ServiceResult> Get();
+        Task<ServiceResult> GetById(int Id);
+        Task<ProductAddResponse> SaveProduct(ProductAddDto productAddDto);
+        Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto);
+        Task<ServiceResult> GetProductoCategoriaDetail(int productoId);
 
     }
 }

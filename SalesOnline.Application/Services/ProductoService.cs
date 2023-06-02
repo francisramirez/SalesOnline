@@ -63,6 +63,26 @@ namespace SalesOnline.Application.Services
 
             return result;
         }
+        public async Task<ServiceResult> GetProductoCategoriaDetail(int productoId)
+        {
+            ServiceResult result = new ServiceResult();
+
+            try
+            {
+                var productsCategories = await this.productoRepository.GetProductoCategoria(productoId);
+                
+                result.Data = productsCategories;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = "Error obteniendo las categorias";
+                this.logger.LogError(result.Message, ex.ToString());
+            }
+
+            return result;
+        }
+
         public async Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto)
         {
             ServiceResult result = new ServiceResult();
@@ -93,7 +113,7 @@ namespace SalesOnline.Application.Services
                 producto.Stock = productUpdateDto.Stock;
                 producto.UrlImagen = productUpdateDto.UrlImagen;
                 producto.NombreImagen = productUpdateDto.NombreImagen;
-                producto.IdCategoria = productUpdateDto.IdCategoria;
+                //producto.IdCategoria = productUpdateDto.IdCategoria;
                 producto.Descripcion = productUpdateDto.Descripcion;
                 producto.FechaMod = DateTime.Now;
                 producto.IdUsuarioMod = productUpdateDto.IdUsuario;
@@ -174,19 +194,16 @@ namespace SalesOnline.Application.Services
 
 
                 products = (from prod in (await this.productoRepository.GetAll())
-                            join cate in (await this.categoriaRepository.GetAll()) on prod.IdCategoria equals cate.Id
                             where prod.Id == Id || !Id.HasValue
                             select new Models.ProductGetModel()
                             {
-                                Categoria = cate.Descripcion,
                                 Descripcion = prod.Descripcion,
                                 Marca = prod.Marca,
                                 Precio = prod.Precio,
                                 ProductoId = prod.Id,
                                 Stock = prod.Stock,
-                                CodigoBarra = prod.CodigoBarra, 
-                                IdCategoria= prod.IdCategoria, 
-                                NombreImagen = prod.NombreImagen, 
+                                CodigoBarra = prod.CodigoBarra,
+                                NombreImagen = prod.NombreImagen,
                                 UrlImagen = prod.UrlImagen
                             }).ToList();
             }
