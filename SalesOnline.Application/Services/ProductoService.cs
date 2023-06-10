@@ -82,7 +82,6 @@ namespace SalesOnline.Application.Services
 
             return result;
         }
-
         public async Task<ServiceResult> GetProductosByCategoria(int categoriaId)
         {
             ServiceResult result = new ServiceResult();
@@ -98,7 +97,6 @@ namespace SalesOnline.Application.Services
             }
             return result;
         }
-
         public async Task<ServiceResult> ModifyProduct(ProductUpdateDto productUpdateDto)
         {
             ServiceResult result = new ServiceResult();

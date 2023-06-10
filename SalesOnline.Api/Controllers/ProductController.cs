@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesOnline.Application.Contract;
 using SalesOnline.Application.Dtos.Producto;
-using SalesOnline.Domain.Entities.Almacen;
-using SalesOnline.Infraestructure.Exceptions;
-using SalesOnline.Infraestructure.Interfaces;
+
 
 namespace SalesOnline.Api.Controllers
 {
@@ -12,8 +10,7 @@ namespace SalesOnline.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductoService productoService;
-
-        public ProductController(IProductoService productoService)
+                public ProductController(IProductoService productoService)
         {
             this.productoService = productoService;
         }

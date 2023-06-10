@@ -88,6 +88,9 @@ namespace SalesOnline.Infraestructure.Repositories
                                                          {
                                                              CategoriaId = ca.Id,
                                                              Descripcion = ca.Descripcion
+                  
+                                                         
+                                                         
                                                          }).ToList();
 
                 }

@@ -64,7 +64,7 @@ namespace SalesOnline.Infraestructure.Configurations
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.Property(e => e.Clave)
-                    .HasMaxLength(100)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Correo)

@@ -16,19 +16,22 @@ namespace SalesOnline.Infraestructure.Repositories
     {
         private readonly SalesContext context;
         private readonly ILogger<CategoriaRepository> logger;
+        
         public CategoriaRepository(SalesContext context, 
                                    ILogger<CategoriaRepository> logger) :base(context)
         {
             this.context = context;
             this.logger = logger;
+           
         }
 
         public async override Task<IEnumerable<Categoria>> GetAll()
         {
             List<Categoria> categorias = new List<Categoria>();
-
+          
             try
             {
+              
                 categorias =  await  this.context.Categoria.Where(cd => !cd.Eliminado).ToListAsync();
             }
             catch (Exception ex)

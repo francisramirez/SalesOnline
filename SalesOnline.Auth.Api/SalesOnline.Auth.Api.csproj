@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SalesOnline.Application\SalesOnline.Application.csproj" />
-    <ProjectReference Include="..\SalesOnline.Infraestructure\SalesOnline.Infraestructure.csproj" />
     <ProjectReference Include="..\SalesOnline.IOC\SalesOnline.IOC.csproj" />
   </ItemGroup>
 
