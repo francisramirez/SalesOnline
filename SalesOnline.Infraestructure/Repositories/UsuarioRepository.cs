@@ -29,7 +29,7 @@ namespace SalesOnline.Infraestructure.Repositories
             try
             {
                 Usuario usuario = await this.context.Usuario.SingleOrDefaultAsync(us => us.Correo == correo
-                                          && us.Clave == Encript.GetSHA512(clave));
+                                          && us.Clave == Encript.GetSHA256(clave));
 
                 usuarioModel = new UsuarioModel()
                 {

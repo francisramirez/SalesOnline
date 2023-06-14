@@ -53,7 +53,7 @@ namespace SalesOnline.Application.Services
                 {
                     Correo = productAddDto.Correo,
                     Nombre = productAddDto.Nombre,
-                    Clave = Encript.GetSHA512(productAddDto.Clave),
+                    Clave = Encript.GetSHA256(productAddDto.Clave),
                     IdRol = productAddDto.IdRol,
                     NombreFoto = productAddDto.NombreFoto,
                     IdUsuarioCreacion = productAddDto.IdUsuario,

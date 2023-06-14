@@ -67,6 +67,8 @@ namespace SalesOnline.Web.ApiServices.Services
                 {
                     string url = $" {this.baseUrl}/Product";
 
+                    //httpClient.
+
                     using (var response = await httpClient.GetAsync(url))
                     {
                         if (response.IsSuccessStatusCode)
