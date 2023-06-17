@@ -2,6 +2,11 @@
 {
     public class ObtenerTokenResponse : ResponseBase
     {
-        public string data { get; set; }
+        public TokenInfo data { get; set; }
+    }
+    public class TokenInfo 
+    {
+        public string? token { get; set; }
+        public DateTime fechaexpiracion { get; set; }
     }
 }

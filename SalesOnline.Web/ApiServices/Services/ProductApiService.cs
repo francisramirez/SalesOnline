@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 using SalesOnline.Web.ApiServices.Interfaces;
 using SalesOnline.Web.Models.Requests;
 using SalesOnline.Web.Models.Responses;
@@ -12,7 +13,10 @@ namespace SalesOnline.Web.ApiServices.Services
         private readonly IConfiguration configuration;
         private readonly ILogger<ProductApiService> logger;
         private readonly string baseUrl;
+        private readonly string myToken;
 
+        private string _token;
+       
         public ProductApiService(IHttpClientFactory clientFactory,
                                  IConfiguration configuration,
                                  ILogger<ProductApiService> logger)
@@ -21,7 +25,17 @@ namespace SalesOnline.Web.ApiServices.Services
             this.configuration = configuration;
             this.logger = logger;
             this.baseUrl = this.configuration["ApiConfig:urlBase"];
+            
+
         }
+
+        public string Token 
+        {
+            get;
+            set; 
+             
+        }
+
         public async Task<ProductoGetResponse> GetProducto(int Id)
         {
             ProductoGetResponse productoGet = new ProductoGetResponse();
@@ -31,6 +45,8 @@ namespace SalesOnline.Web.ApiServices.Services
 
                 using (var httpClient = this.clientFactory.CreateClient())
                 {
+
+
 
                     string url = $" {this.baseUrl}/Product/{Id}";
 
@@ -67,8 +83,8 @@ namespace SalesOnline.Web.ApiServices.Services
                 {
                     string url = $" {this.baseUrl}/Product";
 
-                    //httpClient.
-
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer { this.Token }");
+                    
                     using (var response = await httpClient.GetAsync(url))
                     {
                         if (response.IsSuccessStatusCode)
@@ -101,6 +117,7 @@ namespace SalesOnline.Web.ApiServices.Services
                 {
                     string url = $" {this.baseUrl}/Product/SaveProduct";
 
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {this.Token}");
 
                     StringContent request = new StringContent(JsonConvert.SerializeObject(productRequest), Encoding.UTF8, "application/json");
 
@@ -135,6 +152,8 @@ namespace SalesOnline.Web.ApiServices.Services
                 using (var httpClient = this.clientFactory.CreateClient())
                 {
                     string url = $" {this.baseUrl}/Product/UpdateProduct";
+                   
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {this.Token}");
 
                     StringContent request = new StringContent(JsonConvert.SerializeObject(productRequest), Encoding.UTF8, "application/json");
 

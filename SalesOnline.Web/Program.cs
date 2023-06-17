@@ -1,5 +1,6 @@
 using SalesOnline.Web.ApiServices.Interfaces;
 using SalesOnline.Web.ApiServices.Services;
+using SalesOnline.Web.Dependencies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,18 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<IProductApiService, ProductApiService>();
+
+#region "Apis Dependency"
+
+builder.Services.AddApiAlmancenDependency();
+builder.Services.AddAuthDependencyApi();
+
+#endregion
+
+
+builder.Services.AddSession();
+
+
 
 var app = builder.Build();
 
@@ -25,8 +37,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

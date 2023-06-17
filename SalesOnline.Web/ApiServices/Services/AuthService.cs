@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 using SalesOnline.Web.ApiServices.Interfaces;
 using SalesOnline.Web.Models.Requests;
 using SalesOnline.Web.Models.Responses;
-using System.Text;
+
 
 namespace SalesOnline.Web.ApiServices.Services
 {
@@ -19,7 +20,7 @@ namespace SalesOnline.Web.ApiServices.Services
             this.clientFactory = clientFactory;
             this.configuration = configuration;
             this.logger = logger;
-            this.baseUrl = this.configuration["ApiConfig:urlBase"];
+            this.baseUrl = this.configuration["ApiConfig:urlBaseAuth"];
         }
         public async Task<CreateUserResponse> CreateUser(CreateUserRequest createUserRequest)
         {

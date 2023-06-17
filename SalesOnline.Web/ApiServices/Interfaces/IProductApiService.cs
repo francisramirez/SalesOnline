@@ -3,7 +3,7 @@ using SalesOnline.Web.Models.Responses;
 
 namespace SalesOnline.Web.ApiServices.Interfaces
 {
-    public interface IProductApiService
+    public interface IProductApiService : IBaseApiService
     {
         Task<ProductoListResponse> GetProductos();
         Task<ProductoGetResponse> GetProducto(int Id);

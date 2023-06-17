@@ -8,7 +8,7 @@ using static System.Net.WebRequestMethods;
 
 namespace SalesOnline.Web.Controllers
 {
-    public class ProductoController : Controller
+    public class ProductoController : BaseController
     {
         private readonly IProductApiService productApiService;
         private readonly IConfiguration configuration;
@@ -30,20 +30,11 @@ namespace SalesOnline.Web.Controllers
 
             try
             {
+
+                this.productApiService.Token = base.GetToken();
                 productoList = await this.productApiService.GetProductos();
 
-                //using (var httpclient = new HttpClient(this.clientHandler))
-                //{
-                //    var response = await httpclient.GetAsync("http://localhost:5062/api/Product");
-
-                //    if (response.IsSuccessStatusCode)
-                //    {
-                //        string resp = await response.Content.ReadAsStringAsync();
-
-                //        productoList = JsonConvert.DeserializeObject<ProductoListResponse>(resp);
-
-                //    }
-                //}
+                 
             }
             catch (Exception ex)
             {
@@ -61,24 +52,11 @@ namespace SalesOnline.Web.Controllers
 
             try
             {
+                 var token = HttpContext.Session.GetString("myToken");
 
                 productoGet = await this.productApiService.GetProducto(id);
 
-                //using (var httpclient = new HttpClient(this.clientHandler))
-                //{
-
-                //    var url = "http://localhost:5062/api/Product/" + id;
-
-                //    var response = await httpclient.GetAsync(url);
-
-                //    if (response.IsSuccessStatusCode)
-                //    {
-                //        string resp = await response.Content.ReadAsStringAsync();
-
-                //        productoGet = JsonConvert.DeserializeObject<ProductoGetResponse>(resp);
-
-                //    }
-                //}
+               
             }
             catch (Exception ex)
             {
@@ -123,8 +101,7 @@ namespace SalesOnline.Web.Controllers
             {
                 codigoBarra = productoGet.data.codigoBarra,
                 descripcion = productoGet.data.descripcion,
-                idCategoria = productoGet.data.idCategoria,
-                marca = productoGet.data.marca,
+                 marca = productoGet.data.marca,
                 nombreImagen = productoGet.data.nombreImagen,
                 precio = productoGet.data.precio,
                 stock = productoGet.data.stock,

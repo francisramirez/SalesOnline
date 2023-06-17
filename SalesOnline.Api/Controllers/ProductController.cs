@@ -10,7 +10,7 @@ namespace SalesOnline.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductoService productoService;
-                public ProductController(IProductoService productoService)
+        public ProductController(IProductoService productoService)
         {
             this.productoService = productoService;
         }
@@ -32,7 +32,7 @@ namespace SalesOnline.Api.Controllers
 
 
             return Ok(result);
-            
+
         }
 
 
@@ -85,6 +85,6 @@ namespace SalesOnline.Api.Controllers
 
             return Ok(result);
         }
-       
+
     }
 }
