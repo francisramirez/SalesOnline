@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-
 using SalesOnline.Web.ApiServices.Interfaces;
 using SalesOnline.Web.Models.Requests;
 using SalesOnline.Web.Models.Responses;
@@ -13,7 +12,7 @@ namespace SalesOnline.Web.ApiServices.Services
         private readonly IConfiguration configuration;
         private readonly ILogger<ProductApiService> logger;
         private readonly string baseUrl;
-        private readonly string myToken;
+       
 
         private string _token;
        
