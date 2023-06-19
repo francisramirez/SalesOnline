@@ -65,8 +65,8 @@ namespace SalesOnline.Infraestructure.Repositories
 
             try
             {
-                var productCategories = context.Producto.Include(cd => cd.ProductoCategoria)
-                                        .FirstOrDefault(cd => cd.Id == productoId);
+                var productCategories =  await context.Producto.Include(cd => cd.ProductoCategoria)
+                                                              .FirstOrDefaultAsync(cd => cd.Id == productoId);
 
 
                 if (productCategories != null)
@@ -88,9 +88,9 @@ namespace SalesOnline.Infraestructure.Repositories
                                                          {
                                                              CategoriaId = ca.Id,
                                                              Descripcion = ca.Descripcion
-                  
-                                                         
-                                                         
+
+
+
                                                          }).ToList();
 
                 }
@@ -108,22 +108,24 @@ namespace SalesOnline.Infraestructure.Repositories
 
         public async override Task Save(Producto entity)
         {
-            //if (!await this.context.Categoria.AnyAsync(cd => cd.Id == entity.IdCategoria))
-            //{
-            //    throw new ProductoException("La categoria no se encuentra registrada");
-            //}
-
-
-            await base.Save(entity);
-            await base.SaveChanges();
+          
+            await Task.WhenAll(
+                   base.Save(entity),
+                   base.SaveChanges()
+                );
 
 
         }
         public override async Task Update(Producto entity)
         {
 
-            await base.Update(entity);
-            await base.SaveChanges();
+            await Task.WhenAll(
+                    base.Update(entity),
+                    base.SaveChanges()
+
+                );
+            ;
+
         }
     }
 }
